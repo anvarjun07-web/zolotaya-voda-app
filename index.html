@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="tg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0d">
+  <title>Золотая Вода | Ариф Хиджама</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo.jpg" alt="Золотая Вода">
+      <div><b>ЗОЛОТАЯ ВОДА</b><small>АРИФ ХИДЖАМА</small></div>
+    </div>
+    <button class="icon-btn" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+  </header>
+
+  <main>
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div>
+          <span class="gold-label">ХУШ ОМАДЕД</span>
+          <h1>Атрро интихоб кунед,<br>хизматро фармоиш диҳед.</h1>
+          <p>Парфюмерия, тавсияҳои атр ва хиджама — ҳама дар як ҷо.</p>
+          <div class="hero-actions">
+            <button class="gold-btn" onclick="showScreen('perfume')">Дидани атрҳо</button>
+            <button class="dark-btn" onclick="showScreen('hijama')">Ариф Хиджама</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head"><h2>Категорияҳо</h2></div>
+      <div class="category-grid">
+        <button onclick="filterGender('Мардона')">👨<span>Атрҳои мардона</span></button>
+        <button onclick="filterGender('Занона')">👩<span>Атрҳои занона</span></button>
+        <button onclick="showScreen('trends')">🔥<span>Дар тренд</span></button>
+        <button onclick="showScreen('weather')">☀️<span>Аз рӯи ҳаво</span></button>
+      </div>
+
+      <div class="section-head"><h2>Имрӯз барои шумо</h2><button onclick="showScreen('perfume')">Ҳама</button></div>
+      <div id="homeProducts" class="product-row"></div>
+
+      <div class="info-card">
+        <div class="info-icon">🩸</div>
+        <div>
+          <h3>Ариф Хиджама</h3>
+          <p>Маълумот, омодагӣ, саволҳои маъмул ва сабти қабул.</p>
+          <button class="text-btn" onclick="showScreen('hijama')">Муфассал →</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="perfume" class="screen">
+      <div class="page-title"><h1>Парфюмерия</h1><p>Атрро аз рӯи завқ ва ҳолат интихоб кунед.</p></div>
+      <input id="search" class="search" placeholder="🔎  Ҷустуҷӯи атр..." oninput="renderProducts()">
+      <div class="chips">
+        <button class="chip active" onclick="setFilter('Ҳама',this)">Ҳама</button>
+        <button class="chip" onclick="setFilter('Мардона',this)">Мардона</button>
+        <button class="chip" onclick="setFilter('Занона',this)">Занона</button>
+        <button class="chip" onclick="setFilter('Премиум',this)">Премиум</button>
+        <button class="chip" onclick="setFilter('Тренд',this)">🔥 Тренд</button>
+      </div>
+      <div id="products" class="product-grid"></div>
+    </section>
+
+    <section id="trends" class="screen">
+      <div class="page-title"><h1>🔥 Атрҳои дар тренд</h1><p>Рӯйхатро администратор метавонад нав кунад.</p></div>
+      <div id="trendProducts" class="product-grid"></div>
+    </section>
+
+    <section id="weather" class="screen">
+      <div class="page-title"><h1>☀️ Атр аз рӯи ҳаво</h1><p>Барои интихоби атр обу ҳаво муҳим аст.</p></div>
+      <div class="weather-card">
+        <div class="weather-big" id="weatherIcon">☀️</div>
+        <div><b id="weatherTitle">Тавсияи имрӯз</b><p id="weatherText">Барои ҳавои гарм атрҳои сабук, тару тоза ва ситрусӣ бештар мувофиқанд.</p></div>
+      </div>
+      <div class="tips">
+        <article><b>☀️ Ҳавои гарм</b><span>Ситрусӣ, акватикӣ, сабук</span></article>
+        <article><b>❄️ Ҳавои сард</b><span>Ванил, уд, амбра, ҳанут</span></article>
+        <article><b>🌙 Шом</b><span>Ширин, шарқӣ, сершлейф</span></article>
+        <article><b>🌤 Рӯз</b><span>Тоза, гулдор, мевагӣ</span></article>
+      </div>
+    </section>
+
+    <section id="hijama" class="screen">
+      <div class="page-title"><h1>🩸 Ариф Хиджама</h1><p>Маълумоти фаҳмо ва сабти қабул.</p></div>
+      <div class="hijama-hero">
+        <h2>Хидмати бодиққат ва тоза</h2>
+        <p>Пеш аз тартиб ҳолати худро ба мутахассис бигӯед. Хиджама ҷойи машварати духтурро намегирад.</p>
+      </div>
+      <div class="accordion">
+        <button onclick="toggleInfo(this)">Хиджама чист? <b>+</b></button>
+        <div>Хиджама як усули анъанавии гузоштани косаҳои вакуумӣ ба пӯст мебошад. Пеш аз гузаронидан шароити шахсӣ ва мувофиқати тартиб бояд арзёбӣ шавад.</div>
+        <button onclick="toggleInfo(this)">Чӣ гуна омодагӣ бинем? <b>+</b></button>
+        <div>Об нӯшед, дар бораи доруҳо ва бемориҳои худ пешакӣ хабар диҳед ва дастурҳои мутахассисро риоя кунед.</div>
+        <button onclick="toggleInfo(this)">Пас аз хиджама чӣ бояд кард? <b>+</b></button>
+        <div>Тибқи тавсияи мутахассис нигоҳубини ҷойҳои коркардшударо анҷом диҳед ва агар нишонаҳои ғайриоддӣ пайдо шаванд, ба духтур муроҷиат кунед.</div>
+        <button onclick="toggleInfo(this)">Кӣ бояд аввал бо духтур маслиҳат кунад? <b>+</b></button>
+        <div>Шахсони дорои бемориҳои музмин, мушкилоти хунравӣ, ҳомиладорӣ ё дигар ҳолатҳои махсус бояд пешакӣ бо мутахассиси тиббӣ маслиҳат кунанд.</div>
+      </div>
+      <button class="gold-btn full" onclick="showScreen('booking')">📅 Сабти хиджама</button>
+      <button class="outline-btn full" onclick="showScreen('massage')">💆 Массаж</button>
+    </section>
+
+    <section id="massage" class="screen">
+      <div class="page-title"><h1>💆 Массаж</h1><p>Хизматҳоро интихоб карда, барои қабул сабт шавед.</p></div>
+      <div class="service-card"><b>Массажи умумӣ</b><span>Давомнокӣ: 60 дақиқа</span><button onclick="selectService('Массажи умумӣ')">Интихоб кардан</button></div>
+      <div class="service-card"><b>Массажи оромбахш</b><span>Давомнокӣ: 45 дақиқа</span><button onclick="selectService('Массажи оромбахш')">Интихоб кардан</button></div>
+      <button class="gold-btn full" onclick="showScreen('booking')">Сабти қабул</button>
+    </section>
+
+    <section id="booking" class="screen">
+      <div class="page-title"><h1>📅 Сабти қабул</h1><p>Маълумоти худро гузоред.</p></div>
+      <form id="bookingForm" class="form" onsubmit="submitBooking(event)">
+        <label>Ном<input required name="name" placeholder="Номи шумо"></label>
+        <label>Телефон<input required name="phone" placeholder="+7 ..."></label>
+        <label>Хизмат<select name="service"><option>Хиджама</option><option>Массажи умумӣ</option><option>Массажи оромбахш</option></select></label>
+        <label>Сана<input required type="date" name="date"></label>
+        <label>Вақт<input required type="time" name="time"></label>
+        <label>Шарҳ<textarea name="comment" placeholder="Агар хоҳед, маълумоти иловагӣ нависед"></textarea></label>
+        <button class="gold-btn full">ФИРИСТОДАНИ САБТ</button>
+      </form>
+      <div class="contact-box">📞 <b>+7 902 334 0000</b><br>📍 2-юм Покровский проезд, 12</div>
+    </section>
+
+    <section id="cart" class="screen">
+      <div class="page-title"><h1>🛒 Сабад</h1></div>
+      <div id="cartItems"></div>
+      <div id="cartTotal" class="total"></div>
+      <button id="checkoutBtn" class="gold-btn full" onclick="showScreen('checkout')">Оформить заказ</button>
+    </section>
+
+    <section id="checkout" class="screen">
+      <div class="page-title"><h1>📦 Фармоиши атр</h1><p>Барои фармоиш маълумоти худро гузоред.</p></div>
+      <form class="form" onsubmit="submitOrder(event)">
+        <label>Ном<input required name="name" placeholder="Номи шумо"></label>
+        <label>Телефон<input required name="phone" placeholder="+7 ..."></label>
+        <label>Суроға<input required name="address" placeholder="Суроға барои расондан"></label>
+        <label>Шарҳ<textarea name="comment" placeholder="Шарҳ"></textarea></label>
+        <button class="gold-btn full">ФИРИСТОДАНИ ФАРМОИШ</button>
+      </form>
+    </section>
+
+    <section id="admin" class="screen">
+      <div class="page-title"><h1>⚙️ Админ-панел</h1><p>Маълумоти маҳсулот дар браузер нигоҳ дошта мешавад.</p></div>
+      <div class="admin-note">Ин версия барои оғоз аст. Барои базаи умумӣ ва идоракунии ду админ backend-и ройгон (масалан Firebase/Supabase) пайваст карда мешавад.</div>
+      <form class="form" onsubmit="addProduct(event)">
+        <label>Номи атр<input required name="name" placeholder="Номи маҳсулот"></label>
+        <label>Ҷинс<select name="gender"><option>Мардона</option><option>Занона</option><option>Универсалӣ</option></select></label>
+        <label>Нарх<input required name="price" type="number" min="0" placeholder="0"></label>
+        <label>Стойкость<input name="longevity" placeholder="Масалан: 6–8 соат"></label>
+        <label>Шлейф<input name="sillage" placeholder="Сабук / миёна / қавӣ"></label>
+        <button class="gold-btn full">+ Илова кардани атр</button>
+      </form>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button onclick="showScreen('home')" data-screen="home">🏠<span>Асосӣ</span></button>
+    <button onclick="showScreen('perfume')" data-screen="perfume">🌹<span>Атрҳо</span></button>
+    <button onclick="showScreen('hijama')" data-screen="hijama">🩸<span>Хиджама</span></button>
+    <button onclick="openCart()" data-screen="cart">🛒<span>Сабад</span></button>
+    <button onclick="showScreen('admin')" data-screen="admin">⚙️<span>Админ</span></button>
+  </nav>
+</div>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
